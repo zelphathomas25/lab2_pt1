@@ -11,4 +11,4 @@ helloworld.o: helloworld.c
 
 # !!
 # this make is expecting one main in all the .c files
-# makeing an eit to this file // zelpha
+# makeing an edit to this file // zelpha
