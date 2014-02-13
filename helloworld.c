@@ -4,6 +4,10 @@
 
 main()
 {
-    printf("Hello World");
-
+	int Lcounter = 0;
+	for (Lcounter = 0; Lcounter < 3; Lcounter++)
+	{
+		printf("Hello World");
+	}
+	return 0;
 }
