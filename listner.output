@@ -1,0 +1,106 @@
+input file name is : listner.c  time is: Tue Feb 11 23:08:24 2014
+**************************************
+************* Page Header  ***********
+*************              ***********
+**************************************
+1: #include <stdio.h>
+2: #include <stdlib.h> /* for atoi() */
+3: #include <string.h>
+4: #include <time.h>
+5: #include <stdbool.h>
+6: 
+7: #define fileNameLength  32
+8: #define dateTimeLength  32
+9: #define fileLineLength  256
+10: #define MAX_LINES_PER_PAGE  40
+11: 
+12: FILE *source_file, *outputFile;
+13: char *moder = "r";
+14: char *modew = "w";
+15: char source_name[fileNameLength];
+16: char dateAndTime[dateTimeLength];
+17: 
+18: time_t now;
+19: int line_number = 0;
+20: //time(&now);
+21: //printf("%s",ctime(&now));
+22: 
+23: 
+24: void init_lister(char fileN[] );
+25: bool get_source_line();
+26: void print_line(char print_buff[]);
+27: void print_page_header();
+28: 
+29: 
+30: int main(int argc, char *argv[]){
+31: bool continueReadingFile = true;
+32: 
+33:      if (argc <2 ){
+34:           printf("input is: %d",argc);
+35:           return 0;
+36:      }
+37: init_lister(argv[1]);
+38: 
+39: while ( continueReadingFile){
+40:   continueReadingFile = get_source_line();
+**************************************
+************* Page Header  ***********
+*************              ***********
+**************************************
+41: }
+42: printf("\nend reading file !\nTotal lines: %d ",line_number);
+43: 
+44: return 0;
+45: }
+46: 
+47: void init_lister(char fileN[] ){
+48: 
+49: strcpy(source_name,fileN); // destination, source
+50: source_file = fopen(source_name, moder);
+51: if (source_file == NULL) {
+52:   printf("Can't open input file %s!\n", source_name);
+53:   exit(1);
+54: }
+55: time(&now);
+56: sprintf(dateAndTime, "%s", ctime(&now));
+57: printf("input file name is : %s  time is: %s", source_name, dateAndTime );
+58: 
+59: }
+60: 
+61: bool get_source_line(){
+62: 
+63: bool value = false;
+64: char source_buffer[fileLineLength];
+65: char print_buffer[fileLineLength];
+66: if( fgets (source_buffer, fileLineLength, source_file)!=NULL ) {
+67:       /* writing content to stdout */
+68:       //puts(source_buffer);
+69:       value = true;
+70:       line_number += 1;
+71:       sprintf(print_buffer,"%d: %s",line_number,source_buffer);
+72:      print_line(print_buffer);
+73:    }
+74: //value = false;
+75: return value;
+76: }
+77: void print_line(char print_buff[]){
+78:     static int  line_count =0;
+79:     line_count +=1;
+80:     if ((line_count % MAX_LINES_PER_PAGE) == 1)
+**************************************
+************* Page Header  ***********
+*************              ***********
+**************************************
+81:     {print_page_header(); }
+82: 
+83:     printf("%s",print_buff);
+84: }
+85: void print_page_header(){
+86:     printf("**************************************\n");
+87:     printf("************* Page Header  ***********\n");
+88:     printf("*************              ***********\n")     ;
+89:     printf("**************************************\n");
+90: }
+
+end reading file !
+Total lines: 90 
