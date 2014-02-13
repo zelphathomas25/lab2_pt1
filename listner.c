@@ -19,6 +19,7 @@ time_t now;
 int line_number = 0;
 //time(&now);
 //printf("%s",ctime(&now));
+// this is an update
 
 
 void init_lister(char fileN[] );
